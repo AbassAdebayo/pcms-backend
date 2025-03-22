@@ -51,6 +51,7 @@ namespace Infrastructure.Repositories
                     Email = e.Email,
                     PhoneNumber = e.PhoneNumber,
                     EmployerId = e.EmployerId,
+                    CreatedAt = e.CreatedAt,
                 }).SingleOrDefaultAsync(e => e.Id == id);
         }
 
@@ -65,18 +66,19 @@ namespace Infrastructure.Repositories
                     Email = e.Email,
                     PhoneNumber = e.PhoneNumber,
                     EmployerId = e.EmployerId,
+                    CreatedAt = e.CreatedAt,
                 }).SingleOrDefaultAsync(e => e.Name == name && e.EmployerId == employerId);
         }
 
         public async Task<PaginatedResult<Member>> ListAsync(int page, int pageSize)
         {
-            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber })
+            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber, CreatedAt = m.CreatedAt })
                .AsNoTracking()
                .ToPaginatedResultListAsync(page, pageSize);
         }
         public async Task<PaginatedResult<Member>> ListAsync(int page, int pageSize, Guid employerId)
         {
-            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber })
+            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber, CreatedAt = m.CreatedAt })
                 .Where(m => m.EmployerId == employerId)
                .AsNoTracking()
                .ToPaginatedResultListAsync(page, pageSize);
