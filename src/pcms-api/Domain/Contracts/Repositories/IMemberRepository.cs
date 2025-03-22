@@ -15,7 +15,7 @@ namespace Domain.Contracts.Repositories
         Task DeleteAsync(Member member);
         Task<Member> GetByIdAsync(Guid id);
         Task<Member> GetByNameAsync(string name, Guid employerId);
-        Task<bool> ExistsAsync(Guid email);
+        Task<bool> ExistsAsync(string email);
         Task<PaginatedResult<Member>> ListAsync(int page, int pageSize);
         Task<PaginatedResult<Member>> ListAsync(int page, int pageSize, Guid employerId);
         

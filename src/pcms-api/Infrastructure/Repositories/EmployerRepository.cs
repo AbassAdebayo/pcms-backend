@@ -62,7 +62,7 @@ namespace Infrastructure.Repositories
                  }).SingleOrDefaultAsync(e => e.RegistrationNumber == registrationNumber);
         }
 
-        public Task<Employer> UpdateAsync(Employer employer)
+        public Task<Employer> UpdateAsync(Guid id, Employer employer)
         {
             _context.Entry(employer).State = EntityState.Modified;
             return Task.FromResult(employer);
