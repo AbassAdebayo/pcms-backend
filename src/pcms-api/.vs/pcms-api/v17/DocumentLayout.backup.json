@@ -1,0 +1,173 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\infrastructure\\context\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\infrastructure\\extensions\\servicecollectionextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\extensions\\servicecollectionextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\infrastructure\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9021988-77C7-4556-86AE-AC5C9081DB93}|Api\\Api.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9021988-77C7-4556-86AE-AC5C9081DB93}|Api\\Api.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9021988-77C7-4556-86AE-AC5C9081DB93}|Api\\Api.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C9021988-77C7-4556-86AE-AC5C9081DB93}|Api\\Api.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\infrastructure\\extensions\\dbcontextextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8029EC75-9F41-487F-82D3-D73E6717E78F}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\extensions\\dbcontextextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\domain\\entities\\employer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\employer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\domain\\enums\\eligibilitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|solutionrelative:domain\\enums\\eligibilitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|c:\\users\\hod-sw\\desktop\\pension-contribution-management-system\\src\\pcms-api\\domain\\contracts\\entities\\isoftdeletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A4523F9-CE34-4EED-8F0C-A5A929E2306B}|Domain\\Domain.csproj|solutionrelative:domain\\contracts\\entities\\isoftdeletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContextFactory.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Context\\ApplicationDbContextFactory.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\ApplicationDbContextFactory.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Context\\ApplicationDbContextFactory.cs*",
+              "RelativeToolTip": "Infrastructure\\Context\\ApplicationDbContextFactory.cs*",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T09:48:59.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DbContextExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Extensions\\DbContextExtensions.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Extensions\\DbContextExtensions.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Extensions\\DbContextExtensions.cs",
+              "RelativeToolTip": "Infrastructure\\Extensions\\DbContextExtensions.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADMAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T13:29:07.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServiceCollectionExtension.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Extensions\\ServiceCollectionExtension.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Extensions\\ServiceCollectionExtension.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Extensions\\ServiceCollectionExtension.cs",
+              "RelativeToolTip": "Infrastructure\\Extensions\\ServiceCollectionExtension.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T14:11:10.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Api\\Program.cs",
+              "RelativeDocumentMoniker": "Api\\Program.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Api\\Program.cs",
+              "RelativeToolTip": "Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T14:15:32.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Context\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Infrastructure\\Context\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T13:22:37.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Api\\appsettings.json",
+              "RelativeToolTip": "Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-21T14:13:16.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Employer.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Entities\\Employer.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Employer.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Entities\\Employer.cs",
+              "RelativeToolTip": "Domain\\Entities\\Employer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T14:54:13.258Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EligibilityStatus.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Enums\\EligibilityStatus.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\EligibilityStatus.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Enums\\EligibilityStatus.cs",
+              "RelativeToolTip": "Domain\\Enums\\EligibilityStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T14:45:08.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ISoftDeletable.cs",
+              "DocumentMoniker": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Contracts\\Entities\\ISoftDeletable.cs",
+              "RelativeDocumentMoniker": "Domain\\Contracts\\Entities\\ISoftDeletable.cs",
+              "ToolTip": "C:\\Users\\HOD-SW\\Desktop\\pension-contribution-management-system\\src\\pcms-api\\Domain\\Contracts\\Entities\\ISoftDeletable.cs",
+              "RelativeToolTip": "Domain\\Contracts\\Entities\\ISoftDeletable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T13:32:43.717Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
