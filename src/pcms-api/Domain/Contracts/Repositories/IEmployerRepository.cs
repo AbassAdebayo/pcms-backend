@@ -10,7 +10,7 @@ namespace Domain.Contracts.Repositories
     public interface IEmployerRepository
     {
         Task<Employer> CreateAsync(Employer employer);
-        Task<Employer> UpdateAsync(Employer employer);
+        Task<Employer> UpdateAsync(Guid id, Employer employer);
         Task DeleteAsync(Employer employer);
         Task<Employer> GetByIdAsync(Guid id);
         Task<Employer> GetByRegistrationNumberAsync(string registrationNumber);
