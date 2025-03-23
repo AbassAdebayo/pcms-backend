@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.Employer
 {
-    class GetEmployerByIdQueryValidator : AbstractValidator<GetEmployerByIdQuery>
+    public class GetEmployerByIdQueryValidator : AbstractValidator<GetEmployerByIdQuery>
     {
         public GetEmployerByIdQueryValidator()
         {
