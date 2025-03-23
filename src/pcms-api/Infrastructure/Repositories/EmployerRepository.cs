@@ -40,26 +40,13 @@ namespace Infrastructure.Repositories
 
         public async Task<Employer> GetByIdAsync(Guid id)
         {
-            return await _context.Employers
-                .Select(e => new Employer
-                {
-                    Id = e.Id,
-                    CompanyName = e.CompanyName,
-                    RegistrationNumber = e.RegistrationNumber,
-                    Status = e.Status,
-                }).SingleOrDefaultAsync(e => e.Id == id);
+            return await _context.Employers.FindAsync(id);
         }
 
         public async Task<Employer> GetByRegistrationNumberAsync(string registrationNumber)
         {
             return await _context.Employers
-                 .Select(e => new Employer
-                 {
-                     Id = e.Id,
-                     CompanyName = e.CompanyName,
-                     RegistrationNumber = e.RegistrationNumber,
-                     Status = e.Status,
-                 }).SingleOrDefaultAsync(e => e.RegistrationNumber == registrationNumber);
+            .SingleOrDefaultAsync(e => e.RegistrationNumber == registrationNumber);
         }
 
         public Task<Employer> UpdateAsync(Guid id, Employer employer)

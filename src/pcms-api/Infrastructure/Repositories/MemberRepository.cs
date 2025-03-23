@@ -43,31 +43,13 @@ namespace Infrastructure.Repositories
         public async Task<Member> GetByIdAsync(Guid id)
         {
             return await _context.Members
-                .Select(e => new Member
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    DOB = e.DOB,
-                    Email = e.Email,
-                    PhoneNumber = e.PhoneNumber,
-                    EmployerId = e.EmployerId,
-                    CreatedAt = e.CreatedAt,
-                }).SingleOrDefaultAsync(e => e.Id == id);
+                .FindAsync(id);
         }
 
         public async Task<Member> GetByNameAsync(string name, Guid employerId)
         {
             return await _context.Members
-                .Select(e => new Member
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    DOB = e.DOB,
-                    Email = e.Email,
-                    PhoneNumber = e.PhoneNumber,
-                    EmployerId = e.EmployerId,
-                    CreatedAt = e.CreatedAt,
-                }).SingleOrDefaultAsync(e => e.Name == name && e.EmployerId == employerId);
+                .SingleOrDefaultAsync(e => e.Name == name && e.EmployerId == employerId);
         }
 
         public async Task<PaginatedResult<Member>> ListAsync(int page, int pageSize)
