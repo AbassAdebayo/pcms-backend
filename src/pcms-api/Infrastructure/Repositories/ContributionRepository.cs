@@ -38,13 +38,7 @@ namespace Infrastructure.Repositories
         public async Task<Contribution> GetByIdAsync(Guid id)
         {
            return await _context.Contributions
-                .Select(e => new Contribution
-                {
-                    Id = e.Id,
-                    Amount = e.Amount,
-                    ContributionDate = e.ContributionDate,
-                    MemberId = e.MemberId,
-                }).SingleOrDefaultAsync(e => e.Id == id);
+                .FindAsync(id);
         }
 
         public async Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize)

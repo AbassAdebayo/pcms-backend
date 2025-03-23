@@ -11,7 +11,7 @@ namespace Application.Commands.Employer
     {
         public CreateEmployerCommandValidator()
         {
-            RuleFor(x => x.companyName).NotEmpty();
+            RuleFor(x => x.companyName).NotEmpty().WithMessage("Company Name is required");
         }
     }
 }

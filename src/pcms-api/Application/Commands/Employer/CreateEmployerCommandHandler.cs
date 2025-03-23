@@ -33,7 +33,7 @@ namespace Application.Commands.Employer
                 _logger.LogWarning($"Employer with Name {request.companyName} already exists");
                 return new CreateEmployerCommandResponse()
                 {
-                    Message = $"PFA with Name {request.companyName} already exists"
+                    Message = $"Employer with Name {request.companyName} already exists"
                 };
             }
 
