@@ -12,7 +12,7 @@ namespace Application.Commands.Member
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public Guid EmployerId { get; set; }
     }

@@ -52,7 +52,7 @@ namespace Application.Commands.Member
             //Check if member is btw 18-70
 
             //Check if member is not a minor (under 18)
-            if (request.dOB.AddYears(18) > DateTime.UtcNow.Date)
+            if (request.dateOfBirth.AddYears(18) > DateTime.UtcNow.Date)
             {
                 _logger.LogWarning($"Member with Email {request.email} is a minor, not qualified");
                 return new CreateMemberCommandResponse()
@@ -62,7 +62,7 @@ namespace Application.Commands.Member
             }
 
             //Check if member is not above 70
-            if (request.dOB.AddYears(70) < DateTime.UtcNow.Date)
+            if (request.dateOfBirth.AddYears(70) < DateTime.UtcNow.Date)
             {
                 _logger.LogWarning($"Member with Email {request.email} is above 70, not qualified");
                 return new CreateMemberCommandResponse()
@@ -72,7 +72,7 @@ namespace Application.Commands.Member
             }
 
             //Create Member
-            var member = new Domain.Entities.Member(new Guid(), request.name, request.email, request.dOB, request.phoneNumber, request.employerId);
+            var member = new Domain.Entities.Member(new Guid(), request.name, request.email, request.dateOfBirth, request.phoneNumber, request.employerId);
             if(member == null)
             {
                 _logger.LogWarning($"Member with Email {request.email} not created");
@@ -93,7 +93,7 @@ namespace Application.Commands.Member
                 Id = member.Id,
                 Name = member.Name,
                 Email = member.Email,
-                DOB = member.DOB,
+                DateOfBirth = member.DOB,
                 PhoneNumber = member.PhoneNumber,
                 EmployerId = member.EmployerId
             };
