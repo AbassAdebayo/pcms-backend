@@ -1,4 +1,6 @@
-﻿using Infrastructure.Context;
+﻿using Domain.Contracts.Repositories;
+using Infrastructure.Context;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -11,6 +13,17 @@ namespace Infrastructure.Extensions
 {
     public static class ServiceCollectionExtension
     {
+
+        public static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            return services
+
+                .AddScoped<IMemberRepository, MemberRepository>()
+                .AddScoped<IEmployerRepository, EmployerRepository>()
+                .AddScoped<IContributionRepository, ContributionRepository>()
+                .AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+
         public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
