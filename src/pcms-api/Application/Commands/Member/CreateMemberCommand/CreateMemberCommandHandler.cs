@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static Application.Abstractions.ICommand;
 
-namespace Application.Commands.Member
+namespace Application.Commands.Member.CreateMemberCommand
 {
     public class CreateMemberCommandHandler : ICommand<CreateMemberCommandResponse>
     {

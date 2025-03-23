@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.Member
+namespace Application.Commands.Member.CreateMemberCommand
 {
     public class CreateMemberCommandValidator : AbstractValidator<CreateMemberCommand>
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.Member
+namespace Application.Commands.Member.CreateMemberCommand
 {
     public sealed record CreateMemberCommand(Guid employerId, string name, string email, DateTime dateOfBirth, string phoneNumber) : ICommand
     {
