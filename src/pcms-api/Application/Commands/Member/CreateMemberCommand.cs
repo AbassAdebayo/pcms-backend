@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Member
 {
-    public sealed record CreateMemberCommand(Guid employerId, string name, string email, DateTime dOB, string phoneNumber) : ICommand
+    public sealed record CreateMemberCommand(Guid employerId, string name, string email, DateTime dateOfBirth, string phoneNumber) : ICommand
     {
     }
 }
