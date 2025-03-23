@@ -38,7 +38,7 @@ namespace Application.Commands.Employer
             }
 
             //create PFA
-            var employer = new Domain.Entities.Employer(new Guid(), request.companyName, GenerateRegistrationNumber(request.companyName), Domain.Enums.Status.Active);
+            var employer = new Domain.Entities.Employer(new Guid(), request.companyName, Domain.Enums.Status.Active);
             if (employer == null)
             {
                 _logger.LogWarning($"Employer with Name {request.companyName} not created");
@@ -47,6 +47,7 @@ namespace Application.Commands.Employer
                     Message = $"Employer with Name {request.companyName} not created"
                 };
             }
+            employer.RegistrationNumber = GenerateRegistrationNumber(request.companyName);
             await _employerRepository.CreateAsync(employer);
 
             //Save to Db
