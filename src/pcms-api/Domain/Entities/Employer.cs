@@ -15,11 +15,10 @@ namespace Domain.Entities
         public Status Status { get; set; } = Status.Active;
         public ICollection<Member> Members { get; set; } = new HashSet<Member>();
 
-        public Employer(Guid id, string companyName, string registrtaionNumber, Status status)
+        public Employer(Guid id, string companyName, Status status)
         {
             Id = id;
             CompanyName = companyName;
-            RegistrationNumber = registrtaionNumber;
             Status = status;
 
         }

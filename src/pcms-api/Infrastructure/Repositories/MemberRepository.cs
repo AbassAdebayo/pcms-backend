@@ -54,16 +54,24 @@ namespace Infrastructure.Repositories
 
         public async Task<PaginatedResult<Member>> ListAsync(int page, int pageSize)
         {
-            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber, CreatedAt = m.CreatedAt })
-               .AsNoTracking()
-               .ToPaginatedResultListAsync(page, pageSize);
+            int skip = (page - 1) * pageSize;
+
+            return await _context.Members
+                .Skip(skip)
+                .Take(pageSize)
+                .AsNoTracking()
+                .ToPaginatedResultListAsync(page, pageSize);
         }
         public async Task<PaginatedResult<Member>> ListAsync(int page, int pageSize, Guid employerId)
         {
-            return await _context.Members.Select(m => new Member { Name = m.Name, Email = m.Email, DOB = m.DOB, PhoneNumber = m.PhoneNumber, CreatedAt = m.CreatedAt })
+            int skip = (page - 1) * pageSize;
+
+            return await _context.Members
                 .Where(m => m.EmployerId == employerId)
-               .AsNoTracking()
-               .ToPaginatedResultListAsync(page, pageSize);
+                .Skip(skip)
+                .Take(pageSize)
+                .AsNoTracking()
+                .ToPaginatedResultListAsync(page, pageSize);
         }
 
         public Task<Member> UpdateAsync(Guid id, Member member)
