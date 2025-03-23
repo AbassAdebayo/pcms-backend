@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Contribution : BaseEntity
+    public class Contribution
     {
+        public Guid Id { get; set; }
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
         public Decimal Amount { get; set; }
