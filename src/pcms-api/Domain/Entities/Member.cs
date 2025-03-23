@@ -31,5 +31,14 @@ namespace Domain.Entities
             EmployerId = employerId;
         }
 
+       public Member UpdateMember(string name, string email, DateTime dob, string phoneNumber)
+        {
+            Name = name;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            DOB = dob;
+
+            return this;
+        }
     }
 }

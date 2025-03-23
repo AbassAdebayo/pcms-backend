@@ -22,9 +22,8 @@ namespace Infrastructure.Context
             modelBuilder.ApplyAllConfigurations<ApplicationDbContext>();
             modelBuilder.ConfigureDeletableEntities();
 
-
-            modelBuilder.Entity<Employer>()
-                .HasQueryFilter(e => e.Status == Domain.Enums.Status.Active);
+            modelBuilder.Entity<Member>().HasQueryFilter(m => !m.IsDeleted);
+            modelBuilder.Entity<Employer>().HasQueryFilter(e => e.Status == Domain.Enums.Status.Active);
 
         }
 
