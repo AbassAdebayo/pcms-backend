@@ -1,5 +1,7 @@
-﻿using Domain.Contracts.Repositories;
+﻿using Application.Abstractions;
+using Domain.Contracts.Repositories;
 using Domain.Entities;
+using Domain.Wrapper;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using static Application.Abstractions.ICommand;
 
 namespace Application.Commands.Employer
 {
-    public class CreateEmployerCommandHandler : ICommand<CreateEmployerCommandResponse>
+    public class CreateEmployerCommandHandler : ICommandHandler<CreateEmployerCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmployerRepository _employerRepository;
@@ -24,17 +26,14 @@ namespace Application.Commands.Employer
             _logger = logger;
         }
 
-        public async Task<CreateEmployerCommandResponse> Handle(CreateEmployerCommand request, CancellationToken token)
+        public async Task<Result> Handle(CreateEmployerCommand request, CancellationToken token)
         {
             //check if pfa exist
             var employerExists = await _employerRepository.ExistsAsync(request.companyName);
             if (employerExists)
             {
                 _logger.LogWarning($"Employer with Name {request.companyName} already exists");
-                return new CreateEmployerCommandResponse()
-                {
-                    Message = $"Employer with Name {request.companyName} already exists"
-                };
+               return await Result<string>.FailAsync($"Employer with Name {request.companyName} already exists");
             }
 
             //create PFA
@@ -42,10 +41,7 @@ namespace Application.Commands.Employer
             if (employer == null)
             {
                 _logger.LogWarning($"Employer with Name {request.companyName} not created");
-                return new CreateEmployerCommandResponse()
-                {
-                    Message = $"Employer with Name {request.companyName} not created"
-                };
+                return await Result<string>.FailAsync($"Employer with Name {request.companyName} not created");
             }
             employer.RegistrationNumber = GenerateRegistrationNumber(request.companyName);
             await _employerRepository.CreateAsync(employer);
@@ -53,16 +49,15 @@ namespace Application.Commands.Employer
             //Save to Db
             await _unitOfWork.SaveChangesAsync();
             _logger.LogInformation($"{employer.CompanyName}  Created Successfully");
-
-            return new CreateEmployerCommandResponse()
+            
+            var data = new CreateEmployerCommandResponse
             {
-                IsSuccess = true,
-                Message = "Employer Created",
                 Id = employer.Id,
                 CompanyName = employer.CompanyName,
                 RegistrationNumber = employer.RegistrationNumber,
                 Status = employer.Status
             };
+            return await Result<CreateEmployerCommandResponse>.SuccessAsync(data, $"{employer.CompanyName} created successfully");
         }
 
         private string GenerateRegistrationNumber(string companyName)

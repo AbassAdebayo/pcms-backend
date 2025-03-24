@@ -34,6 +34,12 @@ namespace Infrastructure.Repositories
             _context.Entry(member).State = EntityState.Deleted;
             return Task.FromResult(true);
         }
+        //public Task DeleteAsync(Member member)
+        //{
+        //    member.IsDeleted = true;
+        //    _context.Update(member);
+        //    return Task.CompletedTask;
+        //}
 
         public async Task<bool> ExistsAsync(string email)
         {

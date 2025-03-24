@@ -41,20 +41,20 @@ namespace Api.Controllers.MemberController
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> GetById([FromRoute] Guid Id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var request = new GetMemberByIdQuery(Id);
+            var request = new GetMemberByIdQuery(id);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
 
-        [HttpPost("id/{id}")]
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Delete([FromRoute] Guid Id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var request = new DeleteMemberCommand(Id);
+            var request = new DeleteMemberCommand(id);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
