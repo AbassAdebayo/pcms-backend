@@ -18,6 +18,14 @@ namespace Domain.Entities
 
 
 
+        public Contribution(Guid id, Guid memberId, decimal amount, ContributionType contributionType)
+        {
+            Id = id;
+            MemberId = memberId;
+            Amount = amount;
+            ContributionType = contributionType;
+        }
+
         public void ValidateContributionAmount()
         {
             if (Amount <= 0)

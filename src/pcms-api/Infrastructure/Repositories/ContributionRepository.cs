@@ -41,10 +41,15 @@ namespace Infrastructure.Repositories
                 .FindAsync(id);
         }
 
+        public async Task<bool> HasMonthlyContribution(Guid memberId, DateTime contributionDate)
+        {
+            return await _context.Contributions
+                .AnyAsync(c => c.MemberId == memberId && c.ContributionType == Domain.Enums.ContributionType.MonthlyContributions && c.ContributionDate.Year == contributionDate.Year && c.ContributionDate.Month == contributionDate.Month);
+        }
+
         public async Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize)
         {
             return await _context.Contributions
-                .Select(c => new Contribution { Id = c.Id, Amount = c.Amount, ContributionDate = c.ContributionDate, MemberId = c.MemberId })
                 .AsNoTracking()
                 .ToPaginatedResultListAsync(page, pageSize);
            

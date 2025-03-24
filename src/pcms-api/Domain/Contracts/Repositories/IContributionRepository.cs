@@ -13,6 +13,7 @@ namespace Domain.Contracts.Repositories
         Task<Contribution> CreateAsync(Contribution contribution);
         Task DeleteAsync(Contribution contribution);
         Task<Contribution> GetByIdAsync(Guid id);
+        Task<bool> HasMonthlyContribution(Guid memberId, DateTime contributionDate);
         
         Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize);
     }

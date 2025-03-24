@@ -35,9 +35,6 @@ namespace Application.Commands.Member.DeleteMemberCommand
 
             }
 
-            //member.IsDeleted = true;
-
-            //await _memberRepository.UpdateAsync(request.id, member);
 
             await _memberRepository.DeleteAsync(member);
             await _unitOfWork.SaveChangesAsync();
