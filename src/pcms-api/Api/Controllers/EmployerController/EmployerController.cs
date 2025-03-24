@@ -36,9 +36,9 @@ namespace Api.Controllers.EmployerController
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> GetById([FromRoute] Guid Id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var request = new GetEmployerByIdQuery(Id);
+            var request = new GetEmployerByIdQuery(id);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }

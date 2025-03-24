@@ -1,4 +1,6 @@
-﻿using Domain.Contracts.Repositories;
+﻿using Application.Abstractions;
+using Domain.Contracts.Repositories;
+using Domain.Wrapper;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using static Application.Abstractions.ICommand;
 
 namespace Application.Commands.Member.CreateMemberCommand
 {
-    public class CreateMemberCommandHandler : ICommand<CreateMemberCommandResponse>
+    public class CreateMemberCommandHandler : ICommandHandler<CreateMemberCommand>
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IEmployerRepository _employerRepository;
@@ -25,17 +27,14 @@ namespace Application.Commands.Member.CreateMemberCommand
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<CreateMemberCommandResponse> Handle(CreateMemberCommand request, CancellationToken token)
+        public async Task<Result> Handle(CreateMemberCommand request, CancellationToken token)
         {
             //Check if employer does not exist 
-            var employer = await _memberRepository.GetByIdAsync(request.employerId);
+            var employer = await _employerRepository.GetByIdAsync(request.employerId);
             if (employer == null)
             {
                 _logger.LogWarning($"Employer with Id {request.employerId} does not exist");
-                return new CreateMemberCommandResponse()
-                {
-                    Message = $"Employer with Id {request.employerId} does not exist"
-                };
+                return await Result<string>.FailAsync($"Employer with Id {request.employerId} does not exist");
             }
 
             //Check if member already exists
@@ -43,10 +42,7 @@ namespace Application.Commands.Member.CreateMemberCommand
             if(memberExists)
             {
                 _logger.LogWarning($"Member with Email {request.email} already exists");
-                return new CreateMemberCommandResponse()
-                {
-                    Message = $"Member with Email {request.email} already exists"
-                };
+                return await Result<string>.FailAsync($"Member with Email {request.email} already exists");
             }
 
             //Check if member is btw 18-70
@@ -55,20 +51,14 @@ namespace Application.Commands.Member.CreateMemberCommand
             if (request.dateOfBirth.AddYears(18) > DateTime.UtcNow.Date)
             {
                 _logger.LogWarning($"Member with Email {request.email} is a minor, not qualified");
-                return new CreateMemberCommandResponse()
-                {
-                    Message = $"Member with Email {request.email} is a minor, not qualified"
-                };
+                return await Result<string>.FailAsync($"Member with Email {request.email} is a minor, not qualified");
             }
 
             //Check if member is not above 70
             if (request.dateOfBirth.AddYears(70) < DateTime.UtcNow.Date)
             {
                 _logger.LogWarning($"Member with Email {request.email} is above 70, not qualified");
-                return new CreateMemberCommandResponse()
-                {
-                    Message = $"Member with Email {request.email} is above 70, not qualified"
-                };
+               return await Result<string>.FailAsync($"Member with Email {request.email} is above 70, not qualified");
             }
 
             //Create Member
@@ -76,20 +66,15 @@ namespace Application.Commands.Member.CreateMemberCommand
             if(member == null)
             {
                 _logger.LogWarning($"Member with Email {request.email} not created");
-                return new CreateMemberCommandResponse()
-                {
-                    Message = $"Member with Email {request.email} not created"
-                };
+                return await Result<string>.FailAsync($"Member with Email {request.email} not created");
             }
             await _memberRepository.CreateAsync(member);
 
             //Save to Db
             await _unitOfWork.SaveChangesAsync();
             _logger.LogInformation($"{member.Name}  Created Successfully");
-            return new CreateMemberCommandResponse()
+            var data  = new CreateMemberCommandResponse
             {
-                IsSuccess = true,
-                Message = "Member Created",
                 Id = member.Id,
                 Name = member.Name,
                 Email = member.Email,
@@ -97,6 +82,8 @@ namespace Application.Commands.Member.CreateMemberCommand
                 PhoneNumber = member.PhoneNumber,
                 EmployerId = member.EmployerId
             };
+
+            return await Result<CreateMemberCommandResponse>.SuccessAsync(data, $"{member.Name} created successfully");
         }
     }
     
