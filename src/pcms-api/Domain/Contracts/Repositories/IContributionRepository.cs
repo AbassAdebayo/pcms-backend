@@ -16,6 +16,6 @@ namespace Domain.Contracts.Repositories
         Task<bool> HasMonthlyContribution(Guid memberId, DateTime contributionDate);  
         Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize);
         Task<PaginatedResult<Contribution>> ListAsync(Guid memberId, int page, int pageSize);
-        Task TotalContributions(Guid memberId);
+        Task<decimal> TotalContributions(Guid memberId);
     }
 }
