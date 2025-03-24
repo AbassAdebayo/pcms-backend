@@ -65,7 +65,7 @@ namespace Infrastructure.Repositories
                 .ToPaginatedResultListAsync(page, pageSize);
         }
 
-        public Task TotalContributions(Guid memberId)
+        public Task<decimal> TotalContributions(Guid memberId)
         {
             return _context.Contributions
                 .Where(m => m.Id == memberId)
