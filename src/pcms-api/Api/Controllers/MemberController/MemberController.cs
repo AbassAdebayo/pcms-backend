@@ -2,6 +2,7 @@
 using Application.Commands.Employer;
 using Application.Commands.Member.CreateMemberCommand;
 using Application.Commands.Member.DeleteMemberCommand;
+using Application.Commands.Member.UpdateMemberCommand;
 using Application.Models;
 using Application.Queries.Employer;
 using Application.Queries.Member.GetMemberByIdQuery;
@@ -77,6 +78,46 @@ namespace Api.Controllers.MemberController
         public async Task<IActionResult> ListByEmployer([FromRoute] Guid employerId, [FromRoute] int page, [FromRoute] int pageSize)
         {
             var request = new ListMembersByEmployerIdQuery(employerId, page, pageSize);
+            var response = await _mediator.Send(request);
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPut("update/name")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> UpdateName([FromBody] ChangeMemberNameCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPut("update/email")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> UpdateEmail([FromBody] ChangeMemberEmailCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPut("update/phone-number")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> UpdatePhoneNumber([FromBody] ChangeMemberPhoneNumberCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPut("update/dateOfBirth")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> UpdateDateOfBirth([FromBody] ChangeMemberDateOfBirthCommand request)
+        {
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
