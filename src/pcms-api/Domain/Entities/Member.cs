@@ -31,14 +31,29 @@ namespace Domain.Entities
             EmployerId = employerId;
         }
 
-       public Member UpdateMember(string name, string email, DateTime dob, string phoneNumber)
+       public string ChangeName(string name)
         {
+            var oldName = Name;
             Name = name;
+            return oldName;
+        }
+        public string ChangeEmail(string email)
+        {
+            var oldEmail = Email;
             Email = email;
+            return oldEmail;
+        }
+        public string ChangePhoneNumber(string phoneNumber)
+        {
+            var oldPhoneNumber = PhoneNumber;
             PhoneNumber = phoneNumber;
+            return oldPhoneNumber;
+        }
+        public DateTime ChangeDateOfBirth(DateTime dob)
+        {
+            var oldDob = DOB;
             DOB = dob;
-
-            return this;
+            return oldDob;
         }
     }
 }

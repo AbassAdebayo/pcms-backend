@@ -12,20 +12,21 @@ using static Application.Abstractions.ICommand;
 
 namespace Application.Commands.Member.UpdateMemberCommand
 {
-    public class UpdateMemberCommandHandler : ICommandHandler<UpdateMemberCommand, UpdateMemberCommandResponse>
+    public class ChangeMemberNameCommandHandler : ICommandHandler<ChangeMemberNameCommand>
     {
         private readonly IMemberRepository _memberRepository;
-        private readonly ILogger<UpdateMemberCommandHandler> _logger;
+        private readonly ILogger<ChangeMemberNameCommandHandler> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateMemberCommandHandler(IMemberRepository memberRepository, ILogger<UpdateMemberCommandHandler> logger,
+        public ChangeMemberNameCommandHandler(IMemberRepository memberRepository, ILogger<ChangeMemberNameCommandHandler> logger,
             IUnitOfWork unitOfWork)
         {
             _memberRepository = memberRepository;
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Result<UpdateMemberCommandResponse>> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
+
+        public async Task<Result> Handle(ChangeMemberNameCommand request, CancellationToken cancellationToken)
         {
             //Check if member does not exist
             var member = await _memberRepository.GetByIdAsync(request.id);
@@ -35,47 +36,135 @@ namespace Application.Commands.Member.UpdateMemberCommand
                 return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Id {request.id} does not exist");
             }
 
-            //Check if member already exists
-            var memberExists = await _memberRepository.ExistsAsync(request.email);
-            if (memberExists)
+            //Update member's name
+            member.ChangeName(request.name);
+
+            //Save to Db
+            await _unitOfWork.SaveChangesAsync();
+            _logger.LogInformation($"Member's name updated successfully");
+
+            return await Result<string>.SuccessAsync($"Member's name updated successfully");
+        }
+
+    }
+
+    public class ChangeMemberEmailCommandHandler : ICommandHandler<ChangeMemberEmailCommand>
+    {
+        private readonly IMemberRepository _memberRepository;
+        private readonly ILogger<ChangeMemberEmailCommandHandler> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ChangeMemberEmailCommandHandler(IMemberRepository memberRepository, ILogger<ChangeMemberEmailCommandHandler> logger,
+            IUnitOfWork unitOfWork)
+        {
+            _memberRepository = memberRepository;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<Result> Handle(ChangeMemberEmailCommand request, CancellationToken cancellationToken)
+        {
+            //Check if member does not exist
+            var member = await _memberRepository.GetByIdAsync(request.id);
+            if (member == null)
             {
-                _logger.LogWarning($"Member with Email {request.email} already exists");
-                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Email {request.email} already exists");
+                _logger.LogWarning($"Member with Id {request.id} does not exist");
+                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Id {request.id} does not exist");
             }
+
+            //Update member's email
+            member.ChangeEmail(request.email);
+
+            //Save to Db
+            await _unitOfWork.SaveChangesAsync();
+            _logger.LogInformation($"Member's email updated successfully");
+
+            return await Result<string>.SuccessAsync($"Member's email updated successfully");
+        }
+
+    }
+
+    public class ChangeMemberPhoneNumberCommandHandler : ICommandHandler<ChangeMemberPhoneNumberCommand>
+    {
+        private readonly IMemberRepository _memberRepository;
+        private readonly ILogger<ChangeMemberPhoneNumberCommandHandler> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        public ChangeMemberPhoneNumberCommandHandler(IMemberRepository memberRepository, ILogger<ChangeMemberPhoneNumberCommandHandler> logger,
+            IUnitOfWork unitOfWork)
+        {
+            _memberRepository = memberRepository;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
+        public async Task<Result> Handle(ChangeMemberPhoneNumberCommand request, CancellationToken cancellationToken)
+        {
+            //Check if member does not exist
+            var member = await _memberRepository.GetByIdAsync(request.id);
+            if (member == null)
+            {
+                _logger.LogWarning($"Member with Id {request.id} does not exist");
+                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Id {request.id} does not exist");
+            }
+
+            //Update member's phone number
+            member.ChangePhoneNumber(request.phoneNumber);
+
+            //Save to Db
+            await _unitOfWork.SaveChangesAsync();
+            _logger.LogInformation($"Member's phone number updated successfully");
+
+            return await Result<string>.SuccessAsync($"Member's phone number updated successfully");
+        }
+    }
+
+    public class ChangeMemberDateOfBirthCommandHandler : ICommandHandler<ChangeMemberDateOfBirthCommand>
+    {
+        private readonly IMemberRepository _memberRepository;
+        private readonly ILogger<ChangeMemberDateOfBirthCommandHandler> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        public ChangeMemberDateOfBirthCommandHandler(IMemberRepository memberRepository, ILogger<ChangeMemberDateOfBirthCommandHandler> logger,
+            IUnitOfWork unitOfWork)
+        {
+            _memberRepository = memberRepository;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
+        public async Task<Result> Handle(ChangeMemberDateOfBirthCommand request, CancellationToken cancellationToken)
+        {
+            //Check if member does not exist
+            var member = await _memberRepository.GetByIdAsync(request.id);
+            if (member == null)
+            {
+                _logger.LogWarning($"Member with Id {request.id} does not exist");
+                return await Result<string>.FailAsync($"Member with Id {request.id} does not exist");
+            }
+
+
 
             //Check if member is btw 18-70
             //Check if member is not a minor (under 18)
             if (request.dateOfBirth.AddYears(18) > DateTime.UtcNow.Date)
             {
-                _logger.LogWarning($"Member with Email {request.email} is a minor, not qualified");
-                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Email {request.email} is a minor, not qualified");
+                _logger.LogWarning($"Member with ID {request.id} is a minor, not qualified");
+                return await Result<string>.FailAsync($"Member with ID  {request.id} is a minor, not qualified");
             }
 
             //Check if member is not above 70
             if (request.dateOfBirth.AddYears(70) < DateTime.UtcNow.Date)
             {
-                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Email {request.email} is above 70, not qualified");
+                return await Result<string>.FailAsync($"Member with ID  {request.id} is above 70, not qualified");
             }
 
-            //Swap data to new data
-            member.UpdateMember(request.name, request.email, request.dateOfBirth, request.phoneNumber);
+            //Update member's date of birth
+            member.ChangeDateOfBirth(request.dateOfBirth);
 
             //Save to Db
-            var result = await _memberRepository.UpdateAsync(request.id, member);
             await _unitOfWork.SaveChangesAsync();
+            _logger.LogInformation($"Member's date of birth updated successfully");
 
-            if (result == null)
-            {
-                _logger.LogWarning($"Member with Id {request.id} not updated");
-                return await Result<UpdateMemberCommandResponse>.FailAsync($"Member with Id {request.id} not updated");
-            }
-
-            var data = new UpdateMemberCommandResponse(result.Id, result.Name, result.Email, result.DOB, result.PhoneNumber, result.EmployerId);
-
-            //Return response
-            return await Result<UpdateMemberCommandResponse>.SuccessAsync(data);
-
+            return await Result<string>.SuccessAsync($"Member's date of birth updated successfully");
 
         }
     }
+
 }
