@@ -50,9 +50,26 @@ namespace Infrastructure.Repositories
         public async Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize)
         {
             return await _context.Contributions
+                .OrderByDescending(c => c.ContributionDate)
                 .AsNoTracking()
                 .ToPaginatedResultListAsync(page, pageSize);
            
+        }
+
+        public async Task<PaginatedResult<Contribution>> ListAsync(Guid memberId, int page, int pageSize)
+        {
+            return await _context.Contributions
+                .Where(m => m.Id == memberId)
+                .OrderByDescending(c => c.ContributionDate)
+                .AsNoTracking()
+                .ToPaginatedResultListAsync(page, pageSize);
+        }
+
+        public Task TotalContributions(Guid memberId)
+        {
+            return _context.Contributions
+                .Where(m => m.Id == memberId)
+                .SumAsync(c => c.Amount);
         }
     }
 }
