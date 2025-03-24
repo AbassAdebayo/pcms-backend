@@ -20,7 +20,7 @@ namespace Application.Extensions
             return services
                 .AddMediatR(a => a.RegisterServicesFromAssembly(assembly))
                 .AddTransient(typeof(IPipelineBehaviour<,>), typeof(ValidationBehavior<,>))
-                .AddValidatorsFromAssembly(assembly) // This method is provided by FluentValidation
+                .AddValidatorsFromAssembly(assembly)
                 .AddTransient<ExceptionHandlingMiddleware>();
         }
     }
