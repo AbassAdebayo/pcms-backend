@@ -5,6 +5,7 @@ using Application.Commands.Member.DeleteMemberCommand;
 using Application.Models;
 using Application.Queries.Employer;
 using Application.Queries.Member.GetMemberByIdQuery;
+using Application.Queries.Member.ListMembersQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -53,6 +54,17 @@ namespace Api.Controllers.MemberController
         public async Task<IActionResult> Delete([FromRoute] Guid Id)
         {
             var request = new DeleteMemberCommand(Id);
+            var response = await _mediator.Send(request);
+            return response.Succeeded ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpGet("{page}/{pageSize}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
+        public async Task<IActionResult> List([FromRoute] int page, [FromRoute] int pageSize)
+        {
+            var request = new ListMembersQuery(page, pageSize);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
