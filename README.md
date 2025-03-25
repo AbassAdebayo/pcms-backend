@@ -14,10 +14,10 @@ The **Pension Contribution Management System (EPS+)** is a backend solution desi
 
 ## 🛠 Tech Stack
 - **Language:** C#  
-- **Framework:** .NET Core 7, ASP.NET Web API  
+- **Framework:** .NET Core 8, ASP.NET Web API  
 - **Database:** SQL Server, Entity Framework Core  
 - **Background Jobs:** Hangfire  
-- **Logging:** Serilog  
+- **Logging:** Serilog, NLog  
 - **Unit Testing:** xUnit, Moq  
 
 ## 📌 Setup & Installation
