@@ -25,8 +25,8 @@ The **Pension Contribution Management System (EPS+)** is a backend solution desi
 
 ### 1️⃣ Clone the Repository  
 ```sh
-git clone [REPO_LINK_HERE]
-cd [REPO_NAME]
+git clone (https://github.com/AbassAdebayo/pcms-backend.git)
+cd pcms-backend
 ```
 
 ### 2️⃣ Configure Database  
