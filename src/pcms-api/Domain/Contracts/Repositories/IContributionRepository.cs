@@ -17,5 +17,6 @@ namespace Domain.Contracts.Repositories
         Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize);
         Task<PaginatedResult<Contribution>> ListAsync(Guid memberId, int page, int pageSize);
         Task<decimal> TotalContributions(Guid memberId);
+       
     }
 }

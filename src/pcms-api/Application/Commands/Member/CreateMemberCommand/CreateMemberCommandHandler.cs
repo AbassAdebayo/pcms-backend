@@ -80,7 +80,8 @@ namespace Application.Commands.Member.CreateMemberCommand
                 Email = member.Email,
                 DateOfBirth = member.DOB,
                 PhoneNumber = member.PhoneNumber,
-                EmployerId = member.EmployerId
+                EmployerId = member.EmployerId,
+                IsSuccess = true
             };
 
             return await Result<CreateMemberCommandResponse>.SuccessAsync(data, $"{member.Name} created successfully");

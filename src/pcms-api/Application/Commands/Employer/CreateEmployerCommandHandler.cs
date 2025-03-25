@@ -55,7 +55,8 @@ namespace Application.Commands.Employer
                 Id = employer.Id,
                 CompanyName = employer.CompanyName,
                 RegistrationNumber = employer.RegistrationNumber,
-                Status = employer.Status
+                Status = employer.Status,
+                IsSuccess = true
             };
             return await Result<CreateEmployerCommandResponse>.SuccessAsync(data, $"{employer.CompanyName} created successfully");
         }

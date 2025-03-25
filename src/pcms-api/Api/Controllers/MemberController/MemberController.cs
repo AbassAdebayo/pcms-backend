@@ -14,7 +14,7 @@ using System.Net;
 
 namespace Api.Controllers.MemberController
 {
-    [Route("api/member")]
+    [Route("api/members")]
     [ApiController]
     public class MemberController : ControllerBase
     {
