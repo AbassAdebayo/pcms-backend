@@ -17,7 +17,6 @@ The **Pension Contribution Management System (EPS+)** is a backend solution desi
 - **Framework:** .NET Core 7, ASP.NET Web API  
 - **Database:** SQL Server, Entity Framework Core  
 - **Background Jobs:** Hangfire  
-- **Authentication:** JWT (JSON Web Token)  
 - **Logging:** Serilog  
 - **Unit Testing:** xUnit, Moq  
 
