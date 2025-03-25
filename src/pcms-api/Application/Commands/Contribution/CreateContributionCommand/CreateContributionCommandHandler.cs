@@ -28,9 +28,9 @@ namespace Application.Commands.Contribution.CreateContributionCommand
         }
         public async Task<Result> Handle(CreateContributionCommand request, CancellationToken token)
         {
-            //Check if member does not exist
+            //Check if member exists
             var member = await _memberRepository.GetByIdAsync(request.memberId);
-            if(member == null)
+            if (member == null)
             {
                 _logger.LogWarning($"Member with Id {request.memberId} does not exist");
                 return await Result<string>.FailAsync($"Member with Id {request.memberId} does not exist");
@@ -46,38 +46,46 @@ namespace Application.Commands.Contribution.CreateContributionCommand
                     return await Result<string>.FailAsync($"Member with Id {request.memberId} has already made a monthly for this month");
                 }
             }
+
             //Add contribution
             var contribution = new Domain.Entities.Contribution(new Guid(), request.memberId, request.amount, request.contributionType);
-            if (contribution == null)
+
+            try
             {
-                _logger.LogWarning($"Contribution for Member with Id {request.memberId} not created");
-                return await Result<string>.FailAsync($"Contribution for Member with Id {request.memberId} not created");
+                //Validate amount, update status if invalid
+                contribution.ValidateContributionAmount();  
+
+                await _contributionRepository.CreateAsync(contribution);
+
+                //Mark as completed after successful save
+                contribution.MarkAsCompleted();
+
+                //Save to Db
+                await _unitOfWork.SaveChangesAsync();
+                _logger.LogInformation($"{request.amount} contribution for {member.Name} Created Successfully");
+
+                var data = new CreateContributionCommandResponse
+                {
+                    Id = contribution.Id,
+                    MemberId = contribution.MemberId,
+                    Amount = contribution.Amount,
+                    ContributionType = contribution.ContributionType,
+                    ContributionDate = contribution.ContributionDate,
+                    IsSuccess = true
+                };
+
+                return await Result<CreateContributionCommandResponse>.SuccessAsync(data, $"{request.amount} contribution for {member.Name} created successfully");
             }
-
-            //Validate contribution amount
-            contribution.ValidateContributionAmount();
-
-            //Contribution date
-            contribution.ContributionDate = DateTime.UtcNow;
-            await _contributionRepository.CreateAsync(contribution);
-
-            //Save to Db
-            await _unitOfWork.SaveChangesAsync();
-            _logger.LogInformation($"{request.amount} contribution for {member.Name}  Created Successfully");
-
-            var data = new CreateContributionCommandResponse
+            catch (Exception ex)
             {
-                Id = contribution.Id,
-                MemberId = contribution.MemberId,
-                Amount = contribution.Amount,
-                ContributionType = contribution.ContributionType,
-                ContributionDate = contribution.ContributionDate,
-                IsSuccess = true
+                _logger.LogError($"Error processing contribution for Member {member.Name}: {ex.Message}");
 
-            };
+                //Mark contribution as failed
+                contribution.MarkAsFailed();
+                await _unitOfWork.SaveChangesAsync();
 
-            return await Result<CreateContributionCommandResponse>.SuccessAsync(data, $"{request.amount} contribution for {member.Name} created successfully");
-
+                return await Result<string>.FailAsync($"Failed to process contribution for {member.Name}");
+            }
 
 
 

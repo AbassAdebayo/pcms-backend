@@ -16,8 +16,10 @@ namespace Domain.Entities
         [Column(TypeName = "date")]
         public DateTime DOB { get; set; }
         public string PhoneNumber { get; set; }
+        public decimal? TotalContributions { get; set; }
         public Guid EmployerId { get; set; }
         public Employer Employer { get; set; }
+        public ICollection<Contribution> Contributions { get; set; } = new HashSet<Contribution>();
 
         public Member() { }
 

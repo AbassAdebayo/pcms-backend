@@ -12,6 +12,6 @@ namespace Domain.Entities
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
         public DateTime EligibileFrom { get; set; }
-        public EligibilityStatus EligibilityStatus { get; set; }
+        public EligibilityStatus EligibilityStatus { get; set; } = EligibilityStatus.Pending;
     }
 }

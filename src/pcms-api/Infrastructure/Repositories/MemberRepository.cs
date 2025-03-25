@@ -40,6 +40,19 @@ namespace Infrastructure.Repositories
             return await _context.Members.AnyAsync(e => e.Email == email);
         }
 
+        public async Task<List<Member>> GetAllMembersWithContributions()
+        {
+            return await _context.Members
+                .Include(m => m.Contributions)
+                .Select(c => new Member
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    TotalContributions = c.Contributions.Sum(c => c.Amount)
+                })
+                .ToListAsync();
+        }
+
         public async Task<Member> GetByIdAsync(Guid id)
         {
             return await _context.Members

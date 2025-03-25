@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250325101552_contributionFileds")]
-    partial class contributionFileds
+    [Migration("20250325145421_EntityFieldsUpdated")]
+    partial class EntityFieldsUpdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("ContributionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ContributionStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("ContributionType")
                         .HasColumnType("int");
 
@@ -106,6 +109,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RetryCount")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -208,6 +214,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal?>("TotalContributions")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -235,7 +244,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Contribution", b =>
                 {
                     b.HasOne("Domain.Entities.Member", "Member")
-                        .WithMany()
+                        .WithMany("Contributions")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -257,6 +266,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Employer", b =>
                 {
                     b.Navigation("Members");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Member", b =>
+                {
+                    b.Navigation("Contributions");
                 });
 #pragma warning restore 612, 618
         }

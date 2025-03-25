@@ -45,7 +45,7 @@ namespace Application.Queries.Contribution.ListMemberContributionsQuery
 
             var data = new ListMemberContributionsResponse(membersContributions);
 
-            return await Result<ListMemberContributionsResponse>.SuccessAsync(data, $"Contributions for {member.Name} found");
+            return await Result<ListMemberContributionsResponse>.SuccessAsync(data, $"Contributions for {member.Name} fetched");
         }
     }
 }
