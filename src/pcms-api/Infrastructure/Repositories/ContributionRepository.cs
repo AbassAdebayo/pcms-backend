@@ -34,7 +34,6 @@ namespace Infrastructure.Repositories
             _context.Entry(contribution).State = EntityState.Deleted;
             return Task.FromResult(true);
         }
-
         public async Task<Contribution> GetByIdAsync(Guid id)
         {
            return await _context.Contributions
@@ -59,7 +58,7 @@ namespace Infrastructure.Repositories
         public async Task<PaginatedResult<Contribution>> ListAsync(Guid memberId, int page, int pageSize)
         {
             return await _context.Contributions
-                .Where(m => m.Id == memberId)
+                .Where(m => m.MemberId == memberId)
                 .OrderByDescending(c => c.ContributionDate)
                 .AsNoTracking()
                 .ToPaginatedResultListAsync(page, pageSize);
@@ -68,7 +67,7 @@ namespace Infrastructure.Repositories
         public Task<decimal> TotalContributions(Guid memberId)
         {
             return _context.Contributions
-                .Where(m => m.Id == memberId)
+                .Where(m => m.MemberId == memberId)
                 .SumAsync(c => c.Amount);
         }
     }

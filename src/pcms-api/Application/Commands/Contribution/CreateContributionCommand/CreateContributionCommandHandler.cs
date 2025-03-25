@@ -71,7 +71,9 @@ namespace Application.Commands.Contribution.CreateContributionCommand
                 MemberId = contribution.MemberId,
                 Amount = contribution.Amount,
                 ContributionType = contribution.ContributionType,
-                ContributionDate = contribution.ContributionDate
+                ContributionDate = contribution.ContributionDate,
+                IsSuccess = true
+
             };
 
             return await Result<CreateContributionCommandResponse>.SuccessAsync(data, $"{request.amount} contribution for {member.Name} created successfully");

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Contribution
+    public class Contribution : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
+        
         public Decimal Amount { get; set; }
         public DateTime ContributionDate { get; set; }
         public ContributionType ContributionType { get; set; }

@@ -37,6 +37,12 @@ namespace Application.Queries.Contribution.GetMemberTotalContributionsQuery
             //Get member total contributions
             var totalContributions = await _contributionRepository.TotalContributions(request.memberId);
 
+            if (totalContributions == 0)
+            {
+                _logger.LogError($"Total contributions for member with name {member.Name} not found");
+                return await Result<GetMemberTotalContributionsResponse>.FailAsync($"Total contributions for member with name {member.Name} not found");
+            }
+
             return await Result<GetMemberTotalContributionsResponse>.SuccessAsync(new GetMemberTotalContributionsResponse(totalContributions), $"Total contributions for {member.Name} found");
         }
     }

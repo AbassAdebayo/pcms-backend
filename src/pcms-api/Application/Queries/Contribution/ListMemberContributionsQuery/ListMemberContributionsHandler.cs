@@ -39,11 +39,12 @@ namespace Application.Queries.Contribution.ListMemberContributionsQuery
 
             if (membersContributions == null)
             {
-                _logger.LogError($"Contributions for member with ID {request.memberId} not found");
-                return await Result<ListMemberContributionsResponse>.FailAsync($"Contributions for member with ID {request.memberId} not found");
+                _logger.LogError($"Contributions for member with name {member.Name} not found");
+                return await Result<ListMemberContributionsResponse>.FailAsync($"Contributions for member with name {member.Name} not found");
             }
 
             var data = new ListMemberContributionsResponse(membersContributions);
+
             return await Result<ListMemberContributionsResponse>.SuccessAsync(data, $"Contributions for {member.Name} found");
         }
     }

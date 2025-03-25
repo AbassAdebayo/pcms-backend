@@ -1,22 +1,24 @@
 ﻿using Api.Filters;
-using Application.Commands.Employer;
+using Application.Commands.Contribution.CreateContributionCommand;
+using Application.Commands.Member.CreateMemberCommand;
 using Application.Models;
-using Application.Queries.Employer;
-using Application.Queries.Employer.GetEmployerByRegistrationNumberQuery;
+using Application.Queries.Contribution.GetMemberTotalContributionsQuery;
+using Application.Queries.Contribution.ListMemberContributionsQuery;
+using Application.Queries.Member.ListMembersByEmployerIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Api.Controllers.EmployerController
+namespace Api.Controllers.Contribution
 {
-    [Route("api/employers")]
+    [Route("api/contributions")]
     [ApiController]
-    public class EmployerController : ControllerBase
+    public class ContributionController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<EmployerController> _logger;
+        private readonly ILogger<ContributionController> _logger;
 
-        public EmployerController(IMediator mediator, ILogger<EmployerController> logger)
+        public ContributionController(IMediator mediator, ILogger<ContributionController> logger)
         {
             _mediator = mediator;
             _logger = logger;
@@ -26,30 +28,30 @@ namespace Api.Controllers.EmployerController
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> Create([FromBody] CreateEmployerCommand request)
+        public async Task<IActionResult> Create([FromBody] CreateContributionCommand request)
         {
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
 
-        [HttpGet("id/{id}")]
+        [HttpGet("statement/{memberId}/{page}/{pageSize}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GenerateMemberContributionStatement([FromRoute] Guid memberId, [FromRoute] int page, [FromRoute] int pageSize)
         {
-            var request = new GetEmployerByIdQuery(id);
+            var request = new ListMemberContributionsQuery(memberId, page, pageSize);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
 
-        [HttpGet("registrationNumber/{registrationNumber}")]
+        [HttpGet("total/{memberId}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(BaseResponse))]
-        public async Task<IActionResult> GetById([FromRoute] string registrationNumber)
+        public async Task<IActionResult> GenerateMemberTotalContributions([FromRoute] Guid memberId)
         {
-            var request = new GetEmployerByRegistrationNumberQuery(registrationNumber);
+            var request = new GetMemberTotalContributionsQuery(memberId);
             var response = await _mediator.Send(request);
             return response.Succeeded ? Ok(response) : BadRequest(response);
         }
