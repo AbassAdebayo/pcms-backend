@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Domain.Contracts.Repositories
 {
@@ -17,6 +18,9 @@ namespace Domain.Contracts.Repositories
         Task<PaginatedResult<Contribution>> ListAsync(int page, int pageSize);
         Task<PaginatedResult<Contribution>> ListAsync(Guid memberId, int page, int pageSize);
         Task<decimal> TotalContributions(Guid memberId);
-       
+        Task<List<Contribution>> GetInvalidContributions();
+        Task<List<Contribution>> GetFailedTransactions();
+        Task<bool> RetryTransaction(Guid contributionId);
+        public Task<decimal> CalculateInterest(Guid memberId);
     }
 }

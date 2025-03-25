@@ -1,4 +1,5 @@
-﻿using Domain.Contracts.Repositories;
+﻿using Application.Extensions.NotificationService;
+using Domain.Contracts.Repositories;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,14 @@ namespace Infrastructure.Extensions
         {
             return services
 
+                // Add Repository
                 .AddScoped<IMemberRepository, MemberRepository>()
                 .AddScoped<IEmployerRepository, EmployerRepository>()
                 .AddScoped<IContributionRepository, ContributionRepository>()
+
+                //Add Notification Service
+                .AddScoped<INotificationService, EmailNotificationService>()
+
                 .AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

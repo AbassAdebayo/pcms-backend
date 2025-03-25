@@ -43,7 +43,7 @@ namespace Application.Queries.Contribution.GetMemberTotalContributionsQuery
                 return await Result<GetMemberTotalContributionsResponse>.FailAsync($"Total contributions for member with name {member.Name} not found");
             }
 
-            return await Result<GetMemberTotalContributionsResponse>.SuccessAsync(new GetMemberTotalContributionsResponse(totalContributions), $"Total contributions for {member.Name} found");
+            return await Result<GetMemberTotalContributionsResponse>.SuccessAsync(new GetMemberTotalContributionsResponse(totalContributions), $"Total contributions for {member.Name} fetched");
         }
     }
 }

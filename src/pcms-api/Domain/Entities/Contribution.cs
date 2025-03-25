@@ -11,10 +11,11 @@ namespace Domain.Entities
     {
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
-        
+        public int RetryCount { get; set; } = 0;
         public Decimal Amount { get; set; }
         public DateTime ContributionDate { get; set; }
         public ContributionType ContributionType { get; set; }
+        public ContributionStatus ContributionStatus { get; set; }
 
 
 
@@ -24,14 +25,25 @@ namespace Domain.Entities
             MemberId = memberId;
             Amount = amount;
             ContributionType = contributionType;
+            ContributionStatus = ContributionStatus.Pending;
         }
 
         public void ValidateContributionAmount()
         {
             if (Amount <= 0)
             {
+                ContributionStatus = ContributionStatus.Failed;
                 throw new Exception("Amount must be greater than zero");
             }
+        }
+
+        public void MarkAsCompleted()
+        {
+            ContributionStatus = ContributionStatus.Completed;
+        }
+        public void MarkAsFailed()
+        {
+            ContributionStatus = ContributionStatus.Failed;
         }
 
     }

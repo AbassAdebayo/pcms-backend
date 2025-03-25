@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Domain.Contracts.Repositories
 {
     public interface IBenefitEligibilityRepository
     {
-        Task<BenefitEligibility> UpdateBenefitEligibility(Guid id, BenefitEligibility benefitEligibility);
-        Task<BenefitEligibility> CheckIfMemberIsEligibleAsync(Guid id, Guid Id);
+        Task UpdateBenefitEligibility(Guid memberId, EligibilityStatus eligibilityStatus);
+        Task<BenefitEligibility> GetByMemberIdAsync(Guid memberId);
+        public Task<List<BenefitEligibility>> GetByMembersAsync();
     }
 }

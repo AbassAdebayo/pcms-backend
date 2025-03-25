@@ -18,6 +18,7 @@ namespace Domain.Contracts.Repositories
         Task<bool> ExistsAsync(string email);
         Task<PaginatedResult<Member>> ListAsync(int page, int pageSize);
         Task<PaginatedResult<Member>> ListAsync(int page, int pageSize, Guid employerId);
-        
+        Task<List<Member>> GetAllMembersWithContributions();
+
     }
 }

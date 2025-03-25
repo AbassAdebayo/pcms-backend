@@ -1,6 +1,7 @@
 using Api.ActionResults;
 using Api.Filters;
 using Application.Extensions;
+using Hangfire;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
@@ -70,6 +71,23 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//var scope = app.Services.CreateScope();
+//var jobService = scope.ServiceProvider.GetRequiredService<BackgroundService>();
+
+
+//// Schedule jobs
+//RecurringJob.AddOrUpdate(
+//    "HandleFailedTransactions",
+//    () => jobService.HandleFailedTransactions(),
+//    Cron.MinuteInterval(5));
+    
+
+//RecurringJob.AddOrUpdate(
+//    "UpdateBenefitEligibility",
+//    () => jobService.UpdateBenefitEligibility(),
+//    Cron.Monthly);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
